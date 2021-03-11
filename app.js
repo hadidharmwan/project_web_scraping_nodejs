@@ -3,7 +3,7 @@ const nodemailer = require('node-mailer');
 const fetch = require('node-fetch');
 
 const cnn = 'https://lite.cnn.com/en';
-const string = 'Trump';
+const string = 'Biden';
 
 function getFromCNN(resp) {
     fetch(cnn).then(res => res.text()).then((html) => { resp(html);})
@@ -20,5 +20,10 @@ function getLastestHeadline(data) {
 }
 
 getFromCNN((data) => {
-    console.log(getLastestHeadline(data))
+    const lastestHeadline = getLastestHeadline(data);
+    if(lastestHeadline.title.includes(string)){
+         console.log('Biden article released!');
+        }
+
+    // console.log(lastestHeadline);
 })
