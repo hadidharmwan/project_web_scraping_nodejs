@@ -19,11 +19,11 @@ function getLastestHeadline(data) {
     return Titles[0];   
 }
 
-getFromCNN((data) => {
+setInterval(() => {getFromCNN((data) => {
     const lastestHeadline = getLastestHeadline(data);
     if(lastestHeadline.title.includes(string)){
          console.log('Biden article released!');
         }
 
     // console.log(lastestHeadline);
-})
+})},5 * 1000);
