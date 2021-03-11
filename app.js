@@ -19,11 +19,31 @@ function getLastestHeadline(data) {
     return Titles[0];   
 }
 
-setInterval(() => {getFromCNN((data) => {
-    const lastestHeadline = getLastestHeadline(data);
-    if(lastestHeadline.title.includes(string)){
-         console.log('Biden article released!');
-        }
+// setInterval(() => {getFromCNN((data) => {
+//     const lastestHeadline = getLastestHeadline(data);
+//     if(lastestHeadline.title.includes(string)){
+//          console.log('Biden article released!');
+//         }
 
-    // console.log(lastestHeadline);
-})},5 * 1000);
+//     // console.log(lastestHeadline);
+// })},5 * 1000);
+
+function compare() {
+    getFromCNN((data) => {
+        let previousHeadline = getLastestHeadline(data)
+        console.log(previousHeadline)
+        setTimeout(() => {
+            getFromCNN((data) => {
+                let newestHeadline = getLastestHeadline(data);
+                if(newestHeadline.title !== previousHeadline.title) {
+                    console.log('New article found!');
+                    console.log(newestHeadline)
+                    if(newestHeadline.title.includes(string)) {
+                        console.log('Biden post found');
+                    }
+                }
+            })
+        }, 2 * 1000)
+    })
+}
+setInterval(compare, 10 * 1000);
